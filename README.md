@@ -12,8 +12,10 @@ This repository holds presentations held during the CTF Seminar.
   - [Reverse a cellular automata](gctf-quals-2019/automata)
 + TastelessCTF 2019
   - [web-gabbr](tasteless-2019/web-gabbr)
-+ Hack.lu CTF 2019 
++ Hack.lu CTF 2019
   - [save-our-web](hack.lu-2019/save-our-planet)
   - [numtonce](hack.lu-2019/numtonce)
 + SECCON 2019 Online CTF / RedpwnCTF 2019
   - [lazy / rot26](seccon-2019/lazy)
++ ASIS Cyber Security Contest 2019
+  - [ShareL](asis-2019/sharel)
