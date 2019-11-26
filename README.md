@@ -17,5 +17,7 @@ This repository holds presentations held during the CTF Seminar.
   - [numtonce](hack.lu-2019/numtonce)
 + SECCON 2019 Online CTF / RedpwnCTF 2019
   - [lazy / rot26](seccon-2019/lazy)
++ ENOWARS3 2019
+  - [shittr](enowars3-2019/shittr)
 + ASIS Cyber Security Contest 2019
   - [ShareL](asis-2019/sharel)
