@@ -24,3 +24,5 @@ This repository holds presentations held during the CTF Seminar.
   - [Protected Area](asis-2019/protected-area)
 + Google CTF Finals 2019
   - [genie](gctf-finals-2019/genie)
++ RuCTFE 2019
+  - [radio](ructfe-2019/radio)
