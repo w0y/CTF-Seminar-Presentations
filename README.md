@@ -30,3 +30,5 @@ This repository holds presentations held during the CTF Seminar.
   - [Effing awesome](gctf-finals-2019/effing-awesome)
 + RuCTFE 2019
   - [radio](ructfe-2019/radio)
++ CTFZone 2019 Quals
+  - [shop](ctfzone-quals-2019/shop)
