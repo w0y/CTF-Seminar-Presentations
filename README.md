@@ -24,6 +24,7 @@ This repository holds presentations held during the CTF Seminar.
   - [ShareL](asis-2019/sharel)
   - [Protected Area](asis-2019/protected-area)
   - [Securalloc](asis-2019/securalloc)
+  - [Bit Game](asis-2019/bit-game)
 + Google CTF Finals 2019
   - [genie](gctf-finals-2019/genie)
 + RuCTFE 2019
