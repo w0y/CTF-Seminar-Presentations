@@ -27,5 +27,6 @@ This repository holds presentations held during the CTF Seminar.
   - [Bit Game](asis-2019/bit-game)
 + Google CTF Finals 2019
   - [genie](gctf-finals-2019/genie)
+  - [Effing awesome](gctf-finals-2019/effing-awesome)
 + RuCTFE 2019
   - [radio](ructfe-2019/radio)
