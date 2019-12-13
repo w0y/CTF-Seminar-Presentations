@@ -28,6 +28,7 @@ This repository holds presentations held during the CTF Seminar.
 + Google CTF Finals 2019
   - [genie](gctf-finals-2019/genie)
   - [Effing awesome](gctf-finals-2019/effing-awesome)
+  - [suidbash](gctf-finals-2019/suidbash)
 + RuCTFE 2019
   - [radio](ructfe-2019/radio)
 + CTFZone 2019 Quals
