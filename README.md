@@ -11,6 +11,7 @@ This repository holds presentations held during the CTF Seminar.
 + Google CTF Qualifiers 2019
   - [Reverse a cellular automata](gctf-quals-2019/automata)
   - [Bob needs a file](gctf-quals-2019/bobneedsafile)
+  - [Minetest](gctf-quals-2019/minetest)
   - [Doomed to Repeat It](gctf-quals-2019/doomed-to-repeat-it)
 + TastelessCTF 2019
   - [web-gabbr](tasteless-2019/web-gabbr)
