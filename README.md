@@ -37,3 +37,5 @@ This repository holds presentations held during the CTF Seminar.
   - [radio](ructfe-2019/radio)
 + CTFZone 2019 Quals
   - [shop](ctfzone-quals-2019/shop)
++ 35C3 CTF 2018:
+  - [newphonewhodis / identitytheft](35c3ctf-2018/nokia)
